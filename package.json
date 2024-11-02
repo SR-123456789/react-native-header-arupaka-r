@@ -182,5 +182,8 @@
   "create-react-native-library": {
     "type": "library",
     "version": "0.42.2"
+  },
+  "dependencies": {
+    "react-native-safe-area-context": "^4.14.0"
   }
 }

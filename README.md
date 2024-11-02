@@ -10,7 +10,6 @@ npm install react-native-header-arupaka-r
 
 ## Usage
 
-
 ```js
 import { multiply } from 'react-native-header-arupaka-r';
 
@@ -18,7 +17,6 @@ import { multiply } from 'react-native-header-arupaka-r';
 
 const result = await multiply(3, 7);
 ```
-
 
 ## Contributing
 

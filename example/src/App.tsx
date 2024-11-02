@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { View, Text, SafeAreaView } from 'react-native';
 import { multiply } from 'react-native-header-arupaka-r';
-
+import { ArupakaHeader } from 'react-native-header-arupaka-r';
 export default function App() {
   const [result, setResult] = useState<number | undefined>();
 
@@ -10,21 +10,11 @@ export default function App() {
   }, []);
 
   return (
-    <View style={styles.container}>
-      <Text>Result: {result}</Text>
+    <View>
+      <ArupakaHeader backgroundColor="green" title="Hello, world!s" />
+      <SafeAreaView>
+        <Text>Result: {result}</Text>
+      </SafeAreaView>
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  box: {
-    width: 60,
-    height: 60,
-    marginVertical: 20,
-  },
-});
