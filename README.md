@@ -23,35 +23,18 @@ npm install react-native-header-arupaka-r
 以下のサンプルコードは、react-native-header-arupaka-rを使用して、スクロールに応じてヘッダーが表示・非表示になる機能を有効にした例です。
 
 ```TypeScript
-import React, { useState } from 'react';
-import { ScrollView, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
 import { ArupakaHeaderView } from 'react-native-header-arupaka-r';
 
 const App = () => {
-  const [showHeader, setShowHeader] = useState(true);
-  let lastScrollY = 0;
-
-  const handleScroll = (event) => {
-    const currentScrollY = event.nativeEvent.contentOffset.y;
-    setShowHeader(currentScrollY < lastScrollY);
-    lastScrollY = currentScrollY;
-  };
-
   return (
-    <View style={{ flex: 1 }}>
-      {showHeader && (
-        <ArupakaHeaderView
-          headerTitle="ヘッダー"
-          showBackButton={true}
-          onClickBackButton={() => console.log("バックボタンが押された")}
-        />
-      )}
-      <ScrollView onScroll={handleScroll} scrollEventThrottle={16}>
+    <ArupakaHeaderView headerTitle='ヘッダー' showBackButton={false} onClickBackButton={()=>console.log("バックボタンが押された")}>
+      <View>
         {Array.from({ length: 100 }, (_, i) => (
-          <Text key={i} style={{ padding: 20 }}>{i}</Text>
+          <Text key={i}>{i}</Text>
         ))}
-      </ScrollView>
-    </View>
+      </View>
+    </ArupakaHeaderView>
   );
 };
 
