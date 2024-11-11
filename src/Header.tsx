@@ -1,79 +1,83 @@
-/* eslint-disable react-native/no-inline-styles */
-import React from 'react';
-import { View, Text, Dimensions, StyleSheet } from 'react-native';
-import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
+import React, { useEffect, useState } from 'react';
+import { View, Dimensions, Animated, StyleSheet } from 'react-native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import GetInsetValue from './GetInsetValue';
+import HeaderViewHeaderContent from './HeaderViewHeaderContent';
+import { DefaultHeaderColor, DefaultHeaderHeight } from './DefalutValue';
 
 type HeaderProps = {
   title?: string;
   style?: any;
   height?: number;
   backgroundColor: string;
-  scrollRef?: React.RefObject<any>;
-  content?: () => JSX.Element;
+  isShow: boolean;
+  showBackButton?: boolean;
+  onClickBackButton?: () => void;
+  content: () => React.ReactNode;
 };
 
-const defaultHeight = 50;
-const defaultBackgroundColor = 'red';
-
-// HeaderContentコンポーネント（実際のヘッダー内容）
-const HeaderContent: React.FC<HeaderProps> = ({
+export const Header: React.FC<HeaderProps> = ({
   title,
-  content,
   style,
   backgroundColor,
   height,
+  showBackButton = false,
+  onClickBackButton = () => {},
+  isShow,
+  content,
 }) => {
-  return (
-    <View
-      style={[
-        styles.header,
-        {
-          backgroundColor: backgroundColor
-            ? backgroundColor
-            : defaultBackgroundColor,
-          height: height ? height : defaultHeight,
-          width: Dimensions.get('window').width,
-        },
-      ]}
-    >
-      <Text style={[styles.text, style]}>{title}</Text>
-      {content && content()}
-    </View>
-  );
-};
+  const [translateY] = useState(new Animated.Value(0));
+  const [insetHeight, setInsetHeight] = useState<number>(0);
 
-// SafeAreaProviderでラップするHeaderコンポーネント
-export const Header: React.FC<HeaderProps> = (props) => {
+  useEffect(() => {
+    Animated.timing(translateY, {
+      toValue: isShow ? 0 : -DefaultHeaderHeight,
+      duration: 200,
+      useNativeDriver: true,
+    }).start();
+  }, [isShow, translateY]);
+
   return (
-    <View
-      style={{
-        zIndex: 0,
-        minHeight: props.height ? props.height : defaultHeight,
-      }}
-    >
+    <View style={styles.container}>
       <SafeAreaProvider>
-        <SafeAreaView
-          style={{
-            backgroundColor: props.backgroundColor
-              ? props.backgroundColor
-              : defaultBackgroundColor,
-          }}
-        >
-          <HeaderContent {...props} />
-        </SafeAreaView>
+        <GetInsetValue onChangeHeight={(v: number) => setInsetHeight(v)} />
       </SafeAreaProvider>
+      <View
+        style={[
+          styles.insetBackground,
+          {
+            height: insetHeight,
+            backgroundColor: backgroundColor || DefaultHeaderColor,
+          },
+        ]}
+      />
+      <HeaderViewHeaderContent
+        showBackButton={showBackButton}
+        onClickBackButton={onClickBackButton}
+        insetHeight={insetHeight}
+        isShow={isShow}
+        title={title}
+        style={style}
+        backgroundColor={backgroundColor}
+        height={height}
+        translateY={translateY}
+        content={content}
+      />
     </View>
   );
 };
 
-// スタイルシートの定義
 const styles = StyleSheet.create({
-  header: {
-    justifyContent: 'center',
+  container: {
+    position: 'absolute',
+    width: Dimensions.get('window').width,
+    borderColor: 'gray',
+    borderBottomWidth: 1,
+    zIndex: 1,
   },
-  text: {
-    textAlign: 'center',
-    fontSize: 20,
-    fontWeight: '600',
+  insetBackground: {
+    zIndex: 1000,
   },
 });
+
+export default Header;
