@@ -23,7 +23,7 @@ type Props = {
   headerTitle?: string;
   showBackButton?: boolean;
   onClickBackButton?: () => void;
-  content: () => React.ReactNode;
+  content?: () => React.ReactNode;
 };
 
 const HeaderView = ({
@@ -35,6 +35,7 @@ const HeaderView = ({
   headerTitle,
   onClickBackButton = () => {},
   content,
+  showBackButton = false,
 }: Props) => {
   let beforeScrollY = 0;
 
@@ -73,7 +74,7 @@ const HeaderView = ({
         title={headerTitle}
         backgroundColor={headerColor}
         onClickBackButton={onClickBackButton}
-        showBackButton
+        showBackButton={showBackButton}
         content={content}
       />
       <SafeAreaView

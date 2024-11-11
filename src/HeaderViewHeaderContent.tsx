@@ -18,7 +18,7 @@ type HeaderViewHeaderContentProps = {
   isShow: boolean;
   insetHeight: number;
   showBackButton?: boolean;
-  content: () => React.ReactNode;
+  content?: () => React.ReactNode;
   onClickBackButton?: () => void;
 };
 

@@ -52,14 +52,14 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/SR-123456789/header-arupaka-r.git"
+    "url": "git+https://github.com/SR-123456789/react-native-header-arupaka-r.git"
   },
   "author": "SR-123456789 <playandstoreandgallery@gmail.com> (https://aruku-arupaka-organization.vercel.app/)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/SR-123456789/header-arupaka-r/issues"
+    "url": "https://github.com/SR-123456789/react-native-header-arupaka-r/issues"
   },
-  "homepage": "https://github.com/SR-123456789/header-arupaka-r#readme",
+  "homepage": "https://github.com/SR-123456789/react-native-header-arupaka-r#readme",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },

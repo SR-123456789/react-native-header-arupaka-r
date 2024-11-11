@@ -13,7 +13,7 @@ type HeaderProps = {
   isShow: boolean;
   showBackButton?: boolean;
   onClickBackButton?: () => void;
-  content: () => React.ReactNode;
+  content?: () => React.ReactNode;
 };
 
 export const Header: React.FC<HeaderProps> = ({
