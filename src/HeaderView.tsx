@@ -22,6 +22,7 @@ type Props = {
   headerHeight?: number;
   headerTitle?: string;
   showBackButton?: boolean;
+  useProvider?: boolean;
   onClickBackButton?: () => void;
   content?: () => React.ReactNode;
 };
@@ -36,6 +37,7 @@ const HeaderView = ({
   onClickBackButton = () => {},
   content,
   showBackButton = false,
+  useProvider = true,
 }: Props) => {
   let beforeScrollY = 0;
 
@@ -69,6 +71,7 @@ const HeaderView = ({
   return (
     <>
       <Header
+        useProvider={useProvider}
         height={headerHeight}
         isShow={isShowHeader}
         title={headerTitle}

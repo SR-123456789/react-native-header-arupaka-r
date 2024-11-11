@@ -12,6 +12,7 @@ type HeaderProps = {
   backgroundColor: string;
   isShow: boolean;
   showBackButton?: boolean;
+  useProvider?: boolean;
   onClickBackButton?: () => void;
   content?: () => React.ReactNode;
 };
@@ -24,6 +25,7 @@ export const Header: React.FC<HeaderProps> = ({
   showBackButton = false,
   onClickBackButton = () => {},
   isShow,
+  useProvider,
   content,
 }) => {
   const [translateY] = useState(new Animated.Value(0));
@@ -39,9 +41,14 @@ export const Header: React.FC<HeaderProps> = ({
 
   return (
     <View style={styles.container}>
-      <SafeAreaProvider>
+      {useProvider ? (
         <GetInsetValue onChangeHeight={(v: number) => setInsetHeight(v)} />
-      </SafeAreaProvider>
+      ) : (
+        <SafeAreaProvider>
+          <GetInsetValue onChangeHeight={(v: number) => setInsetHeight(v)} />
+        </SafeAreaProvider>
+      )}
+
       <View
         style={[
           styles.insetBackground,
