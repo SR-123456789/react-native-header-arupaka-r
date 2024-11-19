@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import {
   ScrollView,
   SafeAreaView,
@@ -6,6 +6,8 @@ import {
   type NativeSyntheticEvent,
   type NativeScrollEvent,
   View,
+  Platform,
+  StatusBar,
 } from 'react-native';
 import { Header } from './Header';
 import {
@@ -14,19 +16,7 @@ import {
   DefaultHeaderHeight,
   DefaultNoneScrollMargin,
 } from './DefalutValue';
-
-type Props = {
-  children?: React.ReactNode;
-  footInsetColor?: string;
-  headerColor?: string;
-  contentColor?: string;
-  headerHeight?: number;
-  headerTitle?: string;
-  showBackButton?: boolean;
-  useProvider?: boolean;
-  onClickBackButton?: () => void;
-  content?: () => React.ReactNode;
-};
+import type { HeaderViewProps } from '../index';
 
 const HeaderView = ({
   headerHeight = DefaultHeaderHeight,
@@ -38,7 +28,7 @@ const HeaderView = ({
   onClickBackButton = () => {},
   content,
   showBackButton = false,
-}: Props) => {
+}: HeaderViewProps) => {
   let beforeScrollY = 0;
 
   const [isShowHeader, setIsShowHeader] = useState(true);
@@ -106,6 +96,7 @@ const HeaderView = ({
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
+    paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
   },
   scrollView: {
     flex: 1,

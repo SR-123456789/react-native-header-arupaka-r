@@ -1,9 +1,7 @@
+import type { FC } from 'react';
+import type { HeaderProps, HeaderViewProps } from '../index';
 import { Header } from './Header';
 import HeaderView from './HeaderView';
 
-export const ArupakaHeader = Header;
-export const ArupakaHeaderView = HeaderView;
-
-export function multiply(a: number, b: number): Promise<number> {
-  return Promise.resolve(a * b);
-}
+export const ArupakaHeader: FC<HeaderProps> = Header;
+export const ArupakaHeaderView: FC<HeaderViewProps> = HeaderView;

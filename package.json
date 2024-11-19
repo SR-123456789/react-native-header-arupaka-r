@@ -4,6 +4,7 @@
   "description": "ReactNative用のヘッダーUIライブラリー",
   "source": "./src/index.tsx",
   "main": "./lib/commonjs/index.js",
+  "types": "index.d.ts",
   "module": "./lib/module/index.js",
   "exports": {
     ".": {
@@ -31,6 +32,7 @@
     "!android/gradlew",
     "!android/gradlew.bat",
     "!android/local.properties",
+    "index.d.ts",
     "!**/__tests__",
     "!**/__fixtures__",
     "!**/__mocks__",
