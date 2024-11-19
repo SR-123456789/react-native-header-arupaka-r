@@ -1,6 +1,6 @@
 {
   "name": "react-native-header-arupaka-r",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "ReactNative用のヘッダーUIライブラリー",
   "source": "./src/index.tsx",
   "main": "./lib/commonjs/index.js",
