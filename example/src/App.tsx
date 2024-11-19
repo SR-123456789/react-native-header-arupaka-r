@@ -1,6 +1,5 @@
 import { Text } from 'react-native';
 import { ArupakaHeaderView } from 'react-native-header-arupaka-r';
-
 const App = () => {
   return (
     <ArupakaHeaderView showBackButton headerTitle={'header'}>

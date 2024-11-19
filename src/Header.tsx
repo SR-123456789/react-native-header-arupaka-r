@@ -8,18 +8,7 @@ import {
 } from 'react-native';
 import { DefaultHeaderColor, DefaultHeaderHeight } from './DefalutValue';
 import Ionicons from '@expo/vector-icons/Ionicons';
-
-type HeaderProps = {
-  title?: string;
-  style?: any;
-  height?: number;
-  backgroundColor?: string;
-  isShow: boolean;
-  showBackButton?: boolean;
-  useProvider?: boolean;
-  onClickBackButton?: () => void;
-  content?: () => React.ReactNode;
-};
+import type { HeaderProps } from '../index';
 
 export const Header: React.FC<HeaderProps> = ({
   title,
