@@ -1,15 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import { View, Dimensions, Animated, StyleSheet } from 'react-native';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
-import GetInsetValue from './GetInsetValue';
-import HeaderViewHeaderContent from './HeaderViewHeaderContent';
+import {
+  View,
+  Animated,
+  StyleSheet,
+  TouchableOpacity,
+  Text,
+} from 'react-native';
 import { DefaultHeaderColor, DefaultHeaderHeight } from './DefalutValue';
+import Ionicons from '@expo/vector-icons/Ionicons';
 
 type HeaderProps = {
   title?: string;
   style?: any;
   height?: number;
-  backgroundColor: string;
+  backgroundColor?: string;
   isShow: boolean;
   showBackButton?: boolean;
   useProvider?: boolean;
@@ -19,71 +23,72 @@ type HeaderProps = {
 
 export const Header: React.FC<HeaderProps> = ({
   title,
-  style,
   backgroundColor,
   height,
   showBackButton = false,
   onClickBackButton = () => {},
   isShow,
-  useProvider,
-  content,
+  content = () => <View />,
 }) => {
   const [translateY] = useState(new Animated.Value(0));
-  const [insetHeight, setInsetHeight] = useState<number>(0);
 
   useEffect(() => {
     Animated.timing(translateY, {
-      toValue: isShow ? 0 : -DefaultHeaderHeight,
+      toValue: isShow ? 0 : -DefaultHeaderHeight + 1,
       duration: 200,
       useNativeDriver: true,
     }).start();
   }, [isShow, translateY]);
 
   return (
-    <View style={styles.container}>
-      {useProvider ? (
-        <GetInsetValue onChangeHeight={(v: number) => setInsetHeight(v)} />
-      ) : (
-        <SafeAreaProvider>
-          <GetInsetValue onChangeHeight={(v: number) => setInsetHeight(v)} />
-        </SafeAreaProvider>
-      )}
-
-      <View
-        style={[
-          styles.insetBackground,
-          {
-            height: insetHeight,
-            backgroundColor: backgroundColor || DefaultHeaderColor,
-          },
-        ]}
-      />
-      <HeaderViewHeaderContent
-        showBackButton={showBackButton}
-        onClickBackButton={onClickBackButton}
-        insetHeight={insetHeight}
-        isShow={isShow}
-        title={title}
-        style={style}
-        backgroundColor={backgroundColor}
-        height={height}
-        translateY={translateY}
-        content={content}
-      />
-    </View>
+    <Animated.View
+      style={[
+        styles.animatedView,
+        {
+          height: height || DefaultHeaderHeight,
+          backgroundColor: backgroundColor || DefaultHeaderColor,
+          transform: [{ translateY }],
+        },
+      ]}
+    >
+      <View style={styles.contentView}>
+        {showBackButton && (
+          <TouchableOpacity
+            onPress={() => onClickBackButton()}
+            style={styles.backButton}
+          >
+            <Ionicons name="chevron-back" size={30} color="black" />
+          </TouchableOpacity>
+        )}
+        <View style={styles.contentView}>
+          <Text style={styles.text}>{title}</Text>
+          {content()}
+        </View>
+      </View>
+    </Animated.View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
+  animatedView: {
     position: 'absolute',
-    width: Dimensions.get('window').width,
+    zIndex: 100,
+    width: '100%',
     borderColor: 'gray',
     borderBottomWidth: 1,
-    zIndex: 1,
   },
-  insetBackground: {
-    zIndex: 1000,
+  backButton: {
+    zIndex: 1,
+    position: 'absolute',
+  },
+  contentView: {
+    justifyContent: 'center',
+    height: '100%',
+  },
+  text: {
+    textAlign: 'center',
+    fontSize: 20,
+    fontWeight: '600',
   },
 });
 
