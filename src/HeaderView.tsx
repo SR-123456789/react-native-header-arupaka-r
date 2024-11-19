@@ -5,6 +5,7 @@ import {
   StyleSheet,
   type NativeSyntheticEvent,
   type NativeScrollEvent,
+  View,
 } from 'react-native';
 import { Header } from './Header';
 import {
@@ -31,13 +32,12 @@ const HeaderView = ({
   headerHeight = DefaultHeaderHeight,
   children,
   footInsetColor = 'white',
-  headerColor = 'white',
+  headerColor,
   contentColor,
   headerTitle,
   onClickBackButton = () => {},
   content,
   showBackButton = false,
-  useProvider = true,
 }: Props) => {
   let beforeScrollY = 0;
 
@@ -69,23 +69,22 @@ const HeaderView = ({
   };
 
   return (
-    <>
-      <Header
-        useProvider={useProvider}
-        height={headerHeight}
-        isShow={isShowHeader}
-        title={headerTitle}
-        backgroundColor={headerColor}
-        onClickBackButton={onClickBackButton}
-        showBackButton={showBackButton}
-        content={content}
-      />
-      <SafeAreaView
-        style={[
-          styles.safeArea,
-          { backgroundColor: footInsetColor || DefaultFootInsetColor },
-        ]}
-      >
+    <SafeAreaView
+      style={[
+        styles.safeArea,
+        { backgroundColor: footInsetColor || DefaultFootInsetColor },
+      ]}
+    >
+      <View style={styles.contentView}>
+        <Header
+          isShow={isShowHeader}
+          height={headerHeight}
+          title={headerTitle}
+          backgroundColor={headerColor}
+          onClickBackButton={onClickBackButton}
+          showBackButton={showBackButton}
+          content={content}
+        />
         <ScrollView
           style={[
             styles.scrollView,
@@ -99,8 +98,8 @@ const HeaderView = ({
         >
           {children}
         </ScrollView>
-      </SafeAreaView>
-    </>
+      </View>
+    </SafeAreaView>
   );
 };
 
@@ -110,6 +109,10 @@ const styles = StyleSheet.create({
   },
   scrollView: {
     flex: 1,
+  },
+  contentView: {
+    flex: 1,
+    overflow: 'hidden',
   },
 });
 
