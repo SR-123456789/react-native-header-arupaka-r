@@ -47,7 +47,20 @@ const App = () => {
 export default App;
 ```
 
-Props
+# Props
+
+| Property     | Type            | Default | Description                          |
+|--------------|-----------------|---------|--------------------------------------|
+| headerTitle  | string          | ""      | ヘッダーの中央に表示する文字         |
+| showBackButton | boolean       | false   | 戻るボタンの表示の有無|
+| onClickBackButton | function   | null    | 戻るボタンを押した時に呼ばれる関数
+| headerColor  | string          | white   | ヘッダーの色|
+| headerHeight | number          | 60      | ヘッダーの高さ| 
+| content      | React.ReactNode | null    | ヘッダー内に表示するReactコンポーネント |
+| contentColor | string          | white |scrollviewの色|
+| footInsetColor | string        | white | footerの下のInset部分の色
+
+
 headerTitle: string
 ヘッダーに表示するタイトル。例: "ヘッダー"
 
