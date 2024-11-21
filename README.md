@@ -47,7 +47,7 @@ const App = () => {
 export default App;
 ```
 
-# Props
+## Props
 
 | Property     | Type            | Default | Description                          |
 |--------------|-----------------|---------|--------------------------------------|
@@ -59,14 +59,4 @@ export default App;
 | content      | React.ReactNode | null    | ヘッダー内に表示するReactコンポーネント |
 | contentColor | string          | white |scrollviewの色|
 | footInsetColor | string        | white | footerの下のInset部分の色
-
-
-headerTitle: string
-ヘッダーに表示するタイトル。例: "ヘッダー"
-
-showBackButton: boolean
-バックボタンを表示するかどうかを決定します。trueで表示、falseで非表示。デフォルトはtrue。
-
-onClickBackButton: function
-バックボタンがクリックされたときに呼び出されるコールバック関数。例: () => console.log("バックボタンが押された")
 
