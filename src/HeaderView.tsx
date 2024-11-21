@@ -59,42 +59,47 @@ const HeaderView = ({
   };
 
   return (
-    <SafeAreaView
-      style={[
-        styles.safeArea,
-        { backgroundColor: footInsetColor || DefaultFootInsetColor },
-      ]}
-    >
-      <View style={styles.contentView}>
-        <Header
-          isShow={isShowHeader}
-          height={headerHeight}
-          title={headerTitle}
-          backgroundColor={headerColor}
-          onClickBackButton={onClickBackButton}
-          showBackButton={showBackButton}
-          content={content}
-        />
-        <ScrollView
-          style={[
-            styles.scrollView,
-            {
-              paddingTop: headerHeight,
-              backgroundColor: contentColor || DefaultContentColor,
-            },
-          ]}
-          onScroll={handleScroll}
-          scrollEventThrottle={160}
-        >
-          {children}
-        </ScrollView>
-      </View>
-    </SafeAreaView>
+    <>
+      <SafeAreaView
+        style={[
+          styles.safeAreaHeader,
+          { backgroundColor: headerColor || DefaultFootInsetColor },
+        ]}
+      >
+        <View style={styles.contentView}>
+          <Header
+            isShow={isShowHeader}
+            height={headerHeight}
+            title={headerTitle}
+            backgroundColor={headerColor}
+            onClickBackButton={onClickBackButton}
+            showBackButton={showBackButton}
+            content={content}
+          />
+          <ScrollView
+            style={[
+              styles.scrollView,
+              {
+                paddingTop: headerHeight,
+                backgroundColor: contentColor || DefaultContentColor,
+              },
+            ]}
+            onScroll={handleScroll}
+            scrollEventThrottle={160}
+          >
+            {children}
+          </ScrollView>
+        </View>
+      </SafeAreaView>
+      <SafeAreaView
+        style={[{ backgroundColor: footInsetColor || DefaultFootInsetColor }]}
+      />
+    </>
   );
 };
 
 const styles = StyleSheet.create({
-  safeArea: {
+  safeAreaHeader: {
     flex: 1,
     paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
   },
