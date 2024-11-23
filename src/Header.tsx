@@ -11,11 +11,12 @@ import type { HeaderProps } from '..';
 import { DefaultHeaderColor, DefaultHeaderHeight } from './DefalutValue';
 
 export const Header: React.FC<HeaderProps> = ({
+  isGradientAnimated = true,
   backBottomColor = 'black',
   headerTitleColor = 'black',
   showAmount = DefaultHeaderHeight,
   title,
-  backgroundColor,
+  backgroundColor = DefaultHeaderColor,
   height = DefaultHeaderHeight,
   showBackButton = false,
   onClickBackButton = () => {},
@@ -32,12 +33,14 @@ export const Header: React.FC<HeaderProps> = ({
       useNativeDriver: true,
     }).start();
 
-    Animated.timing(gradientColor, {
-      toValue: showAmount / height, // showAmountに応じて色を変化
-      duration: 200,
-      useNativeDriver: true, // 背景色のアニメーションでは`useNativeDriver`は使えない
-    }).start();
-  }, [showAmount, translateY, height, gradientColor]); // showAmountが変更されたときに実行
+    if (isGradientAnimated) {
+      Animated.timing(gradientColor, {
+        toValue: showAmount / height, // showAmountに応じて色を変化
+        duration: 200,
+        useNativeDriver: true, // 背景色のアニメーションでは`useNativeDriver`は使えない
+      }).start();
+    }
+  }, [showAmount, translateY, height, gradientColor, isGradientAnimated]); // showAmountが変更されたときに実行
 
   const backgroundColorInterpolation = gradientColor.interpolate({
     inputRange: [0, 1],
@@ -50,8 +53,9 @@ export const Header: React.FC<HeaderProps> = ({
         styles.animatedView,
         {
           height: height || DefaultHeaderHeight,
-          // backgroundColor: backgroundColor || DefaultHeaderColor,
-          backgroundColor: backgroundColorInterpolation, // アニメーションで色を変化
+          backgroundColor: isGradientAnimated
+            ? backgroundColorInterpolation
+            : backgroundColor, // アニメーションで色を変化
           transform: [{ translateY }], // translateYを反映
         },
       ]}

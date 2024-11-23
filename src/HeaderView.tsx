@@ -19,6 +19,7 @@ import {
 import type { HeaderViewProps } from '../index';
 
 const HeaderView = ({
+  isGradientAnimated = true,
   headerHeight = DefaultHeaderHeight,
   backBottomColor = 'black',
   headerTitleColor = 'black',
@@ -74,6 +75,7 @@ const HeaderView = ({
       >
         <View style={styles.contentView}>
           <Header
+            isGradientAnimated={isGradientAnimated}
             backBottomColor={backBottomColor}
             headerTitleColor={headerTitleColor}
             showAmount={headerHideAmount.current}
