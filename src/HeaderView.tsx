@@ -93,6 +93,7 @@ const HeaderView = ({
                 backgroundColor: contentColor || DefaultContentColor,
               },
             ]}
+            scrollIndicatorInsets={{ top: headerHeight }}
             onScroll={handleScroll}
             scrollEventThrottle={100}
           >
