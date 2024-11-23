@@ -11,6 +11,7 @@ import type { HeaderProps } from '..';
 import { DefaultHeaderColor, DefaultHeaderHeight } from './DefalutValue';
 
 export const Header: React.FC<HeaderProps> = ({
+  headerTitleColor = 'black',
   showAmount = DefaultHeaderHeight,
   title,
   backgroundColor,
@@ -19,7 +20,7 @@ export const Header: React.FC<HeaderProps> = ({
   onClickBackButton = () => {},
   content = () => <View />,
 }) => {
-  const [translateY] = useState(new Animated.Value(DefaultHeaderHeight)); // 初期値は隠れた状態
+  const [translateY] = useState(new Animated.Value(0)); // 初期値は隠れた状態
 
   // showAmountに応じたアニメーション
   useEffect(() => {
@@ -54,7 +55,9 @@ export const Header: React.FC<HeaderProps> = ({
           </TouchableOpacity>
         )}
         <View style={styles.contentView}>
-          <Text style={styles.text}>{title}</Text>
+          <Text style={[{ color: headerTitleColor }, styles.text]}>
+            {title}
+          </Text>
           {content()}
         </View>
       </View>

@@ -20,6 +20,7 @@ import type { HeaderViewProps } from '../index';
 
 const HeaderView = ({
   headerHeight = DefaultHeaderHeight,
+  headerTitleColor = 'black',
   children,
   footInsetColor = 'white',
   headerColor,
@@ -33,7 +34,7 @@ const HeaderView = ({
 
   const [isShowHeader, setIsShowHeader] = useState(true);
   const [, reRenderling] = useState({});
-  const headerHideAmount = useRef(0);
+  const headerHideAmount = useRef(headerHeight);
 
   console.log(headerHideAmount.current);
 
@@ -74,6 +75,7 @@ const HeaderView = ({
       >
         <View style={styles.contentView}>
           <Header
+            headerTitleColor={headerTitleColor}
             showAmount={headerHideAmount.current}
             isShow={isShowHeader}
             height={headerHeight}
@@ -92,7 +94,7 @@ const HeaderView = ({
               },
             ]}
             onScroll={handleScroll}
-            scrollEventThrottle={10}
+            scrollEventThrottle={100}
           >
             {children}
           </ScrollView>
