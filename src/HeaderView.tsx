@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import {
   ScrollView,
   SafeAreaView,
@@ -29,33 +29,25 @@ const HeaderView = ({
   content,
   showBackButton = false,
 }: HeaderViewProps) => {
-  let beforeScrollY = 0;
+  const beforeScrollY = useRef(0);
 
   const [isShowHeader, setIsShowHeader] = useState(true);
-  let isShow = false;
 
   const handleScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
     const currentScrollY = event.nativeEvent.contentOffset.y;
 
     if (currentScrollY < headerHeight + DefaultNoneScrollMargin) {
       setIsShowHeader(true);
-      isShow = true;
       return;
     }
 
-    if (currentScrollY - 10 > beforeScrollY) {
-      if (isShow) {
-        isShow = false;
-        setIsShowHeader(false);
-      }
+    if (currentScrollY - 10 > beforeScrollY.current) {
+      setIsShowHeader(false);
     }
-    if (currentScrollY + 10 < beforeScrollY) {
-      if (!isShow) {
-        isShow = true;
-        setIsShowHeader(true);
-      }
+    if (currentScrollY + 10 < beforeScrollY.current) {
+      setIsShowHeader(true);
     }
-    beforeScrollY = currentScrollY;
+    beforeScrollY.current = currentScrollY;
   };
 
   return (
