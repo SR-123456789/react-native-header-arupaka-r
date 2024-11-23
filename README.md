@@ -2,7 +2,8 @@
 
 `react-native-header-arupaka-r`は、React Nativeアプリで使用できるカスタムヘッダービューコンポーネントです。このコンポーネントでは、画面の上スクロールでヘッダーが表示され、下スクロールでヘッダーが隠れるというスクロールに応じた動作も可能です。
 
-https://github.com/user-attachments/assets/27361ec7-5628-4f72-8f92-a40a04bb1c27
+
+https://github.com/user-attachments/assets/818975d4-7b42-4ca6-9dbf-3df5b66e7671
 
 
 ## 特徴
