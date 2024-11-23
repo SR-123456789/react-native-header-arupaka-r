@@ -1,33 +1,37 @@
 import React, { useEffect, useState } from 'react';
 import {
   View,
+  Text,
+  TouchableOpacity,
   Animated,
   StyleSheet,
-  TouchableOpacity,
-  Text,
 } from 'react-native';
-import { DefaultHeaderColor, DefaultHeaderHeight } from './DefalutValue';
 import Ionicons from '@expo/vector-icons/Ionicons';
-import type { HeaderProps } from '../index';
+import type { HeaderProps } from '..';
+import { DefaultHeaderColor, DefaultHeaderHeight } from './DefalutValue';
 
 export const Header: React.FC<HeaderProps> = ({
+  showAmount = DefaultHeaderHeight,
   title,
   backgroundColor,
-  height,
+  height = DefaultHeaderHeight,
   showBackButton = false,
   onClickBackButton = () => {},
-  isShow,
   content = () => <View />,
 }) => {
-  const [translateY] = useState(new Animated.Value(0));
+  const [translateY] = useState(new Animated.Value(DefaultHeaderHeight)); // 初期値は隠れた状態
 
+  // showAmountに応じたアニメーション
   useEffect(() => {
     Animated.timing(translateY, {
-      toValue: isShow ? 0 : -DefaultHeaderHeight + 1,
-      duration: 200,
+      toValue: Math.max(
+        -DefaultHeaderHeight + 1,
+        -(DefaultHeaderHeight - showAmount)
+      ), // showAmount分だけヘッダーを動かす
+      duration: 200, // アニメーションの時間
       useNativeDriver: true,
     }).start();
-  }, [isShow, translateY]);
+  }, [showAmount, translateY]); // showAmountが変更されたときに実行
 
   return (
     <Animated.View
@@ -36,7 +40,7 @@ export const Header: React.FC<HeaderProps> = ({
         {
           height: height || DefaultHeaderHeight,
           backgroundColor: backgroundColor || DefaultHeaderColor,
-          transform: [{ translateY }],
+          transform: [{ translateY }], // translateYを反映
         },
       ]}
     >
@@ -80,5 +84,3 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
 });
-
-export default Header;

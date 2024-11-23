@@ -32,6 +32,10 @@ const HeaderView = ({
   const beforeScrollY = useRef(0);
 
   const [isShowHeader, setIsShowHeader] = useState(true);
+  const [, reRenderling] = useState({});
+  const headerHideAmount = useRef(0);
+
+  console.log(headerHideAmount.current);
 
   const handleScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
     const currentScrollY = event.nativeEvent.contentOffset.y;
@@ -41,10 +45,20 @@ const HeaderView = ({
       return;
     }
 
-    if (currentScrollY - 10 > beforeScrollY.current) {
+    if (currentScrollY > beforeScrollY.current) {
+      headerHideAmount.current = Math.max(
+        0,
+        headerHideAmount.current - (currentScrollY - beforeScrollY.current)
+      );
+      reRenderling({});
       setIsShowHeader(false);
     }
-    if (currentScrollY + 10 < beforeScrollY.current) {
+    if (currentScrollY < beforeScrollY.current) {
+      headerHideAmount.current = Math.min(
+        DefaultHeaderHeight,
+        headerHideAmount.current + (beforeScrollY.current - currentScrollY)
+      );
+      reRenderling({});
       setIsShowHeader(true);
     }
     beforeScrollY.current = currentScrollY;
@@ -60,6 +74,7 @@ const HeaderView = ({
       >
         <View style={styles.contentView}>
           <Header
+            showAmount={headerHideAmount.current}
             isShow={isShowHeader}
             height={headerHeight}
             title={headerTitle}
@@ -77,7 +92,7 @@ const HeaderView = ({
               },
             ]}
             onScroll={handleScroll}
-            scrollEventThrottle={160}
+            scrollEventThrottle={10}
           >
             {children}
           </ScrollView>

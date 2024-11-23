@@ -2,6 +2,7 @@ import { FC } from 'react';
 
 // Header コンポーネントの型定義
 export interface HeaderProps {
+  showAmount?: number;
   title?: string;
   style?: any;
   height?: number;
