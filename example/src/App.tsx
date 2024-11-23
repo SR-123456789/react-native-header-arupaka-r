@@ -4,6 +4,7 @@ const App = () => {
   return (
     <ArupakaHeaderView
       showBackButton
+      headerTitleColor="white"
       headerTitle={'header'}
       headerColor="green"
     >

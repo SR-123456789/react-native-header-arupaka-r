@@ -25,14 +25,11 @@ export const Header: React.FC<HeaderProps> = ({
   // showAmountに応じたアニメーション
   useEffect(() => {
     Animated.timing(translateY, {
-      toValue: Math.max(
-        -DefaultHeaderHeight + 1,
-        -(DefaultHeaderHeight - showAmount)
-      ), // showAmount分だけヘッダーを動かす
+      toValue: Math.max(-height + 1, -(height - showAmount)), // showAmount分だけヘッダーを動かす
       duration: 200, // アニメーションの時間
       useNativeDriver: true,
     }).start();
-  }, [showAmount, translateY]); // showAmountが変更されたときに実行
+  }, [showAmount, translateY, height]); // showAmountが変更されたときに実行
 
   return (
     <Animated.View

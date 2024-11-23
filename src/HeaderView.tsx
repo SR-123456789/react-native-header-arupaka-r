@@ -56,7 +56,7 @@ const HeaderView = ({
     }
     if (currentScrollY < beforeScrollY.current) {
       headerHideAmount.current = Math.min(
-        DefaultHeaderHeight,
+        headerHeight,
         headerHideAmount.current + (beforeScrollY.current - currentScrollY)
       );
       reRenderling({});
