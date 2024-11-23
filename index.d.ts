@@ -2,6 +2,7 @@ import { FC } from 'react';
 
 // Header コンポーネントの型定義
 export interface HeaderProps {
+  backBottomColor?: string;
   headerTitleColor?: string;
   showAmount?: number;
   title?: string;
@@ -17,6 +18,7 @@ export interface HeaderProps {
 
 // HeaderView コンポーネントの型定義
 export interface HeaderViewProps {
+  backBottomColor?: string;
   headerTitleColor?: string;
   children?: React.ReactNode;
   footInsetColor?: string;

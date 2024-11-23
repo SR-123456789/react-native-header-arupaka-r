@@ -20,6 +20,7 @@ import type { HeaderViewProps } from '../index';
 
 const HeaderView = ({
   headerHeight = DefaultHeaderHeight,
+  backBottomColor = 'black',
   headerTitleColor = 'black',
   children,
   footInsetColor = 'white',
@@ -75,6 +76,7 @@ const HeaderView = ({
       >
         <View style={styles.contentView}>
           <Header
+            backBottomColor={backBottomColor}
             headerTitleColor={headerTitleColor}
             showAmount={headerHideAmount.current}
             isShow={isShowHeader}

@@ -11,6 +11,7 @@ import type { HeaderProps } from '..';
 import { DefaultHeaderColor, DefaultHeaderHeight } from './DefalutValue';
 
 export const Header: React.FC<HeaderProps> = ({
+  backBottomColor = 'black',
   headerTitleColor = 'black',
   showAmount = DefaultHeaderHeight,
   title,
@@ -48,7 +49,7 @@ export const Header: React.FC<HeaderProps> = ({
             onPress={() => onClickBackButton()}
             style={styles.backButton}
           >
-            <Ionicons name="chevron-back" size={30} color="black" />
+            <Ionicons name="chevron-back" size={30} color={backBottomColor} />
           </TouchableOpacity>
         )}
         <View style={styles.contentView}>
