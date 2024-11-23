@@ -4,10 +4,11 @@ const App = () => {
   return (
     <ArupakaHeaderView
       showBackButton
-      headerTitleColor="white"
-      backBottomColor="white"
+      // headerTitleColor="white"
+      // backBottomColor="white"
       headerTitle={'header'}
-      headerColor="green"
+      // headerColor="green"
+      isGradientAnimated={true}
     >
       <Text>aaaa</Text>
       <Text>aaaa</Text>

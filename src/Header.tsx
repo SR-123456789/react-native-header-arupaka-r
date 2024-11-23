@@ -22,6 +22,7 @@ export const Header: React.FC<HeaderProps> = ({
   content = () => <View />,
 }) => {
   const [translateY] = useState(new Animated.Value(0)); // 初期値は隠れた状態
+  const [gradientColor] = useState(new Animated.Value(0)); // グラデーションの変化
 
   // showAmountに応じたアニメーション
   useEffect(() => {
@@ -30,7 +31,18 @@ export const Header: React.FC<HeaderProps> = ({
       duration: 200, // アニメーションの時間
       useNativeDriver: true,
     }).start();
-  }, [showAmount, translateY, height]); // showAmountが変更されたときに実行
+
+    Animated.timing(gradientColor, {
+      toValue: showAmount / height, // showAmountに応じて色を変化
+      duration: 200,
+      useNativeDriver: true, // 背景色のアニメーションでは`useNativeDriver`は使えない
+    }).start();
+  }, [showAmount, translateY, height, gradientColor]); // showAmountが変更されたときに実行
+
+  const backgroundColorInterpolation = gradientColor.interpolate({
+    inputRange: [0, 1],
+    outputRange: ['#ffffff', backgroundColor || DefaultHeaderColor],
+  });
 
   return (
     <Animated.View
@@ -38,7 +50,8 @@ export const Header: React.FC<HeaderProps> = ({
         styles.animatedView,
         {
           height: height || DefaultHeaderHeight,
-          backgroundColor: backgroundColor || DefaultHeaderColor,
+          // backgroundColor: backgroundColor || DefaultHeaderColor,
+          backgroundColor: backgroundColorInterpolation, // アニメーションで色を変化
           transform: [{ translateY }], // translateYを反映
         },
       ]}

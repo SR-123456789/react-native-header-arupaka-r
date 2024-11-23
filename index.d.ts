@@ -14,6 +14,7 @@ export interface HeaderProps {
   useProvider?: boolean;
   onClickBackButton?: () => void;
   content?: () => React.ReactNode;
+  isGradientAnimated?: boolean;
 }
 
 // HeaderView コンポーネントの型定義
@@ -30,6 +31,7 @@ export interface HeaderViewProps {
   useProvider?: boolean;
   onClickBackButton?: () => void;
   content?: () => React.ReactNode;
+  isGradientAnimated?: boolean;
 }
 
 // エクスポートするコンポーネント

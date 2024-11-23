@@ -37,8 +37,6 @@ const HeaderView = ({
   const [, reRenderling] = useState({});
   const headerHideAmount = useRef(headerHeight);
 
-  console.log(headerHideAmount.current);
-
   const handleScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
     const currentScrollY = event.nativeEvent.contentOffset.y;
 
